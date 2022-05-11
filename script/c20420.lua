@@ -31,7 +31,7 @@ function cm.initial_effect(c)
 end
 --e1
 function cm.drtgf(c)
-	return c:IsAbleToDeck() and c:IsSetCard(0x3fd4)
+	return c:IsAbleToDeck() and c:IsSetCard(0xfd4)
 end
 function cm.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) and Duel.IsExistingMatchingCard(cm.drtgf,tp,LOCATION_HAND,0,1,nil) end

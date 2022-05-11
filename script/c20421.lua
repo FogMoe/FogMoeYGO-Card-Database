@@ -25,6 +25,7 @@ function cm.initial_effect(c)
 	e3:SetCode(EVENT_PHASE+PHASE_END)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetCountLimit(1)
+	e3:SetCondition(cm.con3)
 	e3:SetTarget(cm.tg3)
 	e3:SetOperation(cm.op3)
 	c:RegisterEffect(e3)
@@ -45,9 +46,12 @@ function cm.con2(e)
 	local tp=e:GetOwnerPlayer()
 	return Duel.IsExistingMatchingCard(fu_hd.Infinity,tp,LOCATION_MZONE,0,1,nil)
 end
---e5
+--e3
+function cm.con3(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetTurnPlayer()==1-tp
+end
 function cm.tg3(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToHand() and not Duel.GetTurnPlayer()==tp end
+	if chk==0 then return true end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,e:GetHandler(),1,0,0)
 end
 function cm.op3(e,tp,eg,ep,ev,re,r,rp)
