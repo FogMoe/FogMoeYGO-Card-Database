@@ -42,7 +42,7 @@ function c10107.spop(e,tp,eg,ep,ev,re,r,rp,c)
 end
 function c10107.tdfilter(c,tp)
 	return c:IsAbleToDeck()
-		and c:IsSetCard(0x7f7) or c:IsType(TYPE_SPELL)
+		and c:IsType(TYPE_NORMAL) or c:IsType(TYPE_SPELL)
 end
 function c10107.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) and chkc:IsControler(tp) and c10107.tdfilter(chkc,tp) end
@@ -58,14 +58,14 @@ function c10107.tdop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and Duel.SendtoDeck(tc,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)>0
-		and ((tc:IsSetCard(0x7f7) and tc:IsLocation(LOCATION_DECK))
+		and ((tc:IsType(TYPE_NORMAL) and tc:IsLocation(LOCATION_DECK))
 			or (tc:IsType(TYPE_SPELL) and tc:IsLocation(LOCATION_DECK))) then
 		if tc:IsType(TYPE_SPELL) then
 			Duel.BreakEffect()
 			Duel.ShuffleDeck(tp)
 			Duel.Draw(tp,1,REASON_EFFECT)
 		end
-		if tc:IsSetCard(0x7f7)
+		if tc:IsType(TYPE_NORMAL)
 			and c:IsFaceup() and c:IsRelateToEffect(e) then
 			Duel.BreakEffect()
 			local e1=Effect.CreateEffect(c)
