@@ -16,7 +16,7 @@ function cm.initial_effect(c)
 	--
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_TOGRAVE+CATEGORY_SPECIAL_SUMMON)
-	e3:SetType(EFFECT_TYPE_QUICK_O)
+	e3:SetType(EFFECT_TYPE_QUICK_F)
 	e3:SetCode(EVENT_BECOME_TARGET)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCondition(cm.con)
@@ -53,7 +53,7 @@ function cm.op(e,tp,eg,ep,ev,re,r,rp)
 			if g:GetCount()>0 then
 				Duel.BreakEffect()
 				Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
-			end		 
+			end	  
 		end
 	end
 end

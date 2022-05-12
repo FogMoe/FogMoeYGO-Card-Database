@@ -13,7 +13,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function cm.cfilter(c)
-	return c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and c:IsSetCard(0x611)
+	return c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and c:IsSetCard(0x611) and c:IsType(TYPE_XYZ)
 end
 function cm.condition(e,tp,eg,ep,ev,re,r,rp)
 	if not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return end
