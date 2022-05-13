@@ -1,9 +1,10 @@
 name: 'Nightly Merge'
 
 on:
-  schedule:
-    - cron:  '0 0 * * *'
-
+  push:
+    branches:
+      - master
+      
 jobs:
   nightly-merge:
 
