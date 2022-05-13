@@ -21,4 +21,4 @@ jobs:
         development_branch: 'without-pics'
         allow_ff: false
       env:
-        GITHUB_TOKEN: ${{ secrets.AUTOMERGE }}
+        GITHUB_TOKEN: ${{ AUTOMERGE }}
