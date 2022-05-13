@@ -3,7 +3,7 @@ name: 'Nightly Merge'
 on:
   push:
     branches:
-      - master
+      - main
       
 jobs:
   nightly-merge:
@@ -17,7 +17,7 @@ jobs:
     - name: Nightly Merge
       uses: robotology/gh-action-nightly-merge@v1.3.3
       with:
-        stable_branch: 'master'
+        stable_branch: 'main'
         development_branch: 'without-pics'
         allow_ff: false
       env:
