@@ -47,7 +47,7 @@ function cm.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFlagEffect(tp,1541)~=0 and Duel.GetCurrentPhase()==PHASE_END
 end
 function cm.thfilter(c)
-	return c:IsAbleToHand() and c:IsSetCard(0x5f30)
+	return c:IsAbleToHand() and c:IsSetCard(0x5f30) and c:IsType(TYPE_MONSTER)
 end
 function cm.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,LOCATION_HAND,0,1,nil) and Duel.IsExistingMatchingCard(cm.thfilter,tp,LOCATION_GRAVE,0,1,nil) end

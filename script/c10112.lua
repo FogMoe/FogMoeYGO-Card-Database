@@ -1,4 +1,3 @@
---ネフティスの希望
 function c10112.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -12,7 +11,7 @@ function c10112.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function c10112.filter(c)
-	return c:IsFaceup() and c:IsType(TYPE_MONSTER)
+	return c:IsType(TYPE_MONSTER)
 end
 function c10112.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
