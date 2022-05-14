@@ -181,7 +181,7 @@ function cm.cfilter(c)
 	return c:IsSetCard(0x5f30)
 end
 function cm.spfilter(c,e,tp)
-	return c:IsSetCard(0x5f30) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEDOWN_DEFENSE) and c:IsType(TYPE_FLIP)
+	return c:IsSetCard(0x5f30) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEDOWN_DEFENSE) and c:IsType(TYPE_FLIP) and c:IsType(TYPE_MONSTER)
 end
 function cm.thfilter(c)
 	return c:IsCode(1530,1540) and c:IsAbleToHand()

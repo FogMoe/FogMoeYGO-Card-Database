@@ -51,7 +51,7 @@ function cm.splimit(e,c)
 	return not c:IsPosition(POS_FACEUP)
 end
 function cm.filter(c,e,tp)
-	return c:IsFaceup() and c:IsCanTurnSet()
+	return c:IsFaceup() and c:IsCanTurnSet() and not c:IsLocation(LOCATION_PZONE) and not c:IsType(TYPE_LINK) and not c:IsType(TYPE_TOKEN)
 end
 function cm.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
