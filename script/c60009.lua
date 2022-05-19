@@ -1,6 +1,7 @@
 --悲鸣信使
 local m=60009
 local cm=_G["c"..m]
+cm.isArkFog=true
 function cm.initial_effect(c)
 	--negate
 	local e2=Effect.CreateEffect(c)
