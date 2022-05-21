@@ -3,6 +3,7 @@ local m=60011
 local cm=_G["c"..m]
 cm.isArkFog=true
 function cm.initial_effect(c)
+	aux.AddCodeList(c,m-1)
 	--to hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(m,0))
@@ -21,7 +22,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function cm.thfilter(c)
-	return c:IsCode(60010) and c:IsAbleToHand()
+	return c:IsCode(m-1) and c:IsAbleToHand()
 end
 function cm.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cm.thfilter,tp,LOCATION_DECK,0,1,nil) end
