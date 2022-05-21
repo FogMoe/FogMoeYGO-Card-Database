@@ -69,7 +69,7 @@ end
 
 
 function cm.drfilter(c)
-	return c:IsType(TYPE_NORMAL) and c:IsAbleToDeck()
+	return c:IsType(TYPE_NORMAL) or c:IsSetCard(0x9401) and c:IsAbleToDeck()
 end
 function cm.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp)

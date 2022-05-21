@@ -2,7 +2,7 @@ local m=94030
 local cm=_G["c"..m]
 cm.name="真理"
 function cm.initial_effect(c)
-	aux.AddCodeList(c,94010,m)
+	aux.AddCodeList(c,94010,94030)
 	c:EnableCounterPermit(0xa94,LOCATION_SZONE)
 		--Activate
 	local e9=Effect.CreateEffect(c)
