@@ -73,7 +73,7 @@ function c94020.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsCanAddCounter(tp,0xa95,1,c) end
 end
 function c94020.cfilter(c,tp)
-	return c:IsType(TYPE_MONSTER) and c:IsPreviousLocation(LOCATION_MZONE+LOCATION_HAND) and c:GetPreviousControler()==tp and c:IsType(TYPE_NORMAL)
+	return c:IsType(TYPE_MONSTER) and c:IsPreviousLocation(LOCATION_MZONE+LOCATION_HAND) and c:GetPreviousControler()==tp and c:IsSetCard(0x9401)
 end
 function c94020.drcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(c94020.cfilter,1,nil,tp)
