@@ -48,7 +48,7 @@ end
 
 
 function cm.splimit(e,c)
-	return not c:IsPosition(POS_FACEUP)
+	return c:IsPosition(POS_FACEDOWN) and c:IsFacedown()
 end
 function cm.filter(c,e,tp)
 	return c:IsFaceup() and c:IsCanTurnSet() and not c:IsLocation(LOCATION_PZONE) and not c:IsType(TYPE_LINK) and not c:IsType(TYPE_TOKEN)
