@@ -10,6 +10,7 @@ function cm.initial_effect(c)
 	e1:SetTarget(cm.tg1)
 	e1:SetOperation(cm.op1)
 	c:RegisterEffect(e1)
+--[[
 	--ig
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -20,6 +21,7 @@ function cm.initial_effect(c)
 	e2:SetTarget(cm.tg2)
 	e2:SetOperation(cm.op2)
 	c:RegisterEffect(e2)
+--]]
 end
 --e1
 function cm.cos1(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -35,6 +37,7 @@ end
 function cm.op1(e,tp,eg,ep,ev,re,r,rp)
 	Duel.DiscardDeck(tp,3,REASON_EFFECT)
 end
+--[[
 --e2
 function cm.tgf2(c,e,tp)
 	return c:IsSetCard(0x3fd5) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not c:IsType(TYPE_TUNER)
@@ -58,3 +61,4 @@ function cm.op2(e,tp,eg,ep,ev,re,r,rp)
 		tc:RegisterEffect(e1)
 	end
 end
+--]]
