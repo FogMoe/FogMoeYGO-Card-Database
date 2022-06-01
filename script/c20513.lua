@@ -36,7 +36,9 @@ function cm.opf1(c)
 end
 function cm.op1(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e) and Duel.SendtoGrave(tc,REASON_EFFECT+REASON_RETURN)~=0 and Duel.IsExistingMatchingCard(cm.opf1,tp,LOCATION_GRAVE,0,1,nil)
+	if tc:IsRelateToEffect(e) and Duel.SendtoGrave(tc,REASON_EFFECT+REASON_RETURN)~=0 then
+--[[
+		and Duel.IsExistingMatchingCard(cm.opf1,tp,LOCATION_GRAVE,0,1,nil)
 		and Duel.SelectYesNo(tp,aux.Stringid(m,0)) then
 		Duel.BreakEffect()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
@@ -44,6 +46,7 @@ function cm.op1(e,tp,eg,ep,ev,re,r,rp)
 		if g:GetCount()>0 then
 			Duel.SSet(tp,g)
 		end
+--]]
 	end
 end
 --e2

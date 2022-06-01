@@ -1,6 +1,7 @@
 --堕魔贝
 local cm,m,o=GetID()
 function cm.initial_effect(c)
+--[[
 	--summon success
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DRAW)
@@ -10,6 +11,7 @@ function cm.initial_effect(c)
 	e1:SetTarget(cm.tg1)
 	e1:SetOperation(cm.op1)
 	c:RegisterEffect(e1)
+--]]
 	--discard deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DECKDES)
@@ -20,6 +22,7 @@ function cm.initial_effect(c)
 	e2:SetOperation(cm.op2)
 	c:RegisterEffect(e2)
 end
+--[[
 --e1
 function cm.cos1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -37,6 +40,7 @@ function cm.op1(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	Duel.Draw(p,d,REASON_EFFECT)
 end
+--]]
 --e2
 function cm.tg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,3) end

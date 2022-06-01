@@ -38,15 +38,13 @@ end
 function cm.tg3(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and cm.tgf3(chkc) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE,0)>0 and Duel.IsExistingTarget(cm.tgf3,tp,LOCATION_GRAVE,0,1,nil) end
-	local n=Duel.GetLocationCount(tp,LOCATION_SZONE,0)
-	n = n>2 and 2 or n
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local g=Duel.SelectTarget(tp,cm.tgf3,tp,LOCATION_GRAVE,0,1,n,nil)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,#g,0,0)
+	local g=Duel.SelectTarget(tp,cm.tgf3,tp,LOCATION_GRAVE,0,1,1,nil)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
 end
 function cm.op3(e,tp,eg,ep,ev,re,r,rp)
-	local tg=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS):Filter(Card.IsRelateToEffect,nil,e)
-	if #tg>0 then
-		Duel.SSet(tp,tg)
+	local tc = Duel.GetFirstTarget()
+	if tc:IsRelateToEffect(e) then
+		Duel.SSet(tp,tc)
 	end
 end
