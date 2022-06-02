@@ -1,11 +1,11 @@
 --天风魔女
-local m=66917004
+local m=17004
 local cm=_G["c"..m]
 function cm.initial_effect(c)
-	aux.AddCodeList(c,66917000)
+	aux.AddCodeList(c,17000)
 	--fusion material
 	c:EnableReviveLimit()
-	aux.AddFusionProcCodeFun(c,66917000,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_WIND),1,true,true) 
+	aux.AddFusionProcCodeFun(c,17000,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_WIND),1,true,true) 
 	--tohand
 	local e6=Effect.CreateEffect(c)
 	e6:SetDescription(aux.Stringid(m,0))
@@ -31,7 +31,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e2) 
 end
 function cm.starlight_fusion_check(tp,sg,fc)
-	return aux.gffcheck(sg,Card.IsFusionCode,66917000,Card.IsAttribute,ATTRIBUTE_WIND)
+	return aux.gffcheck(sg,Card.IsFusionCode,17000,Card.IsAttribute,ATTRIBUTE_WIND)
 end
 function cm.tfilter2(c)
 	return c:IsAbleToDeck() and c:IsType(TYPE_MONSTER)
@@ -76,7 +76,7 @@ function cm.rmop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cm.cfilters(c)
-	return c:IsFaceup() and c:IsCode(66917001)
+	return c:IsFaceup() and c:IsCode(17001)
 end
 function cm.conditions(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(cm.cfilters,tp,LOCATION_GRAVE,0,1,nil)
