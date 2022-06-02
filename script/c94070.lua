@@ -23,7 +23,7 @@ function cm.con(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(cm.allneedfilter,tp,LOCATION_ONFIELD,0,1,nil)
 end
 function cm.filter(c)
-	return c:IsLocation(LOCATION_MZONE+LOCATION_HAND) and c:IsReleasable() and c:IsType(TYPE_MONSTER) and c:IsType(TYPE_NORMAL)
+	return c:IsLocation(LOCATION_MZONE+LOCATION_HAND) and c:IsReleasable() and c:IsType(TYPE_MONSTER) and c:IsSetCard(0x9401)
 end
 function cm.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckReleaseGroupEx(tp,cm.filter,1,nil) end
