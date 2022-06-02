@@ -58,8 +58,25 @@ function cm.initial_effect(c)
 	e7:SetCondition(c94020.indcon)
 	e7:SetValue(1)
 	c:RegisterEffect(e7)
+	--maintain
+	local e9=Effect.CreateEffect(c)
+	e9:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e9:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e9:SetCode(EVENT_PHASE+PHASE_END)
+	e9:SetRange(LOCATION_SZONE)
+	e9:SetCountLimit(1)
+	e9:SetOperation(cm.mtop)
+	c:RegisterEffect(e9)
 
 end
+function cm.mtop(e,tp,eg,ep,ev,re,r,rp)
+	if Duel.CheckLPCost(tp,300) then
+		Duel.PayLPCost(tp,300)
+	else
+		Duel.Remove(e:GetHandler(),REASON_COST)
+	end
+end
+
 function cm.e2activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	c:AddCounter(0xa95,1)
@@ -73,7 +90,7 @@ function c94020.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsCanAddCounter(tp,0xa95,1,c) end
 end
 function c94020.cfilter(c,tp)
-	return c:IsType(TYPE_MONSTER) and c:IsPreviousLocation(LOCATION_MZONE+LOCATION_HAND) and c:GetPreviousControler()==tp
+	return c:IsType(TYPE_MONSTER) and c:IsPreviousLocation(LOCATION_MZONE+LOCATION_HAND) and c:GetPreviousControler()==tp and c:IsSetCard(0x9401)
 end
 function c94020.cfilterdraw(c,tp)
 	return c:IsType(TYPE_MONSTER) and c:IsPreviousLocation(LOCATION_MZONE+LOCATION_HAND) and c:GetPreviousControler()==tp and c:IsSetCard(0x9401)
@@ -98,8 +115,8 @@ function c94020.counter(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c94020.thfilter1(c,tp)
-	local lv=c:GetLevel()
-	return c:IsLocation(LOCATION_DECK+LOCATION_GRAVE) and lv>0 and c:IsAbleToHand()and Duel.IsCanRemoveCounter(tp,1,0,0xa95,lv,REASON_COST) and c:IsType(TYPE_NORMAL)
+	local lv=c:GetLevel()*2
+	return c:IsLocation(LOCATION_DECK+LOCATION_GRAVE) and lv>0 and c:IsAbleToHand()and Duel.IsCanRemoveCounter(tp,1,0,0xa95,lv,REASON_COST) and c:IsSetCard(0x9401) and c:IsType(TYPE_MONSTER)
 end
 function c94020.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c94020.thfilter1,tp,LOCATION_DECK+LOCATION_GRAVE,0,1,nil,tp) end
@@ -113,18 +130,22 @@ function c94020.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 	local pc=1
 	for i=1,12 do
-		if lvt[i] then lvt[i]=nil lvt[pc]=i pc=pc+1 end
+		
+		   if lvt[i] then lvt[i]=nil lvt[pc]=i pc=pc+1 end
+		
 	end
 	lvt[pc]=nil
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(m,1))
 	local lv=Duel.AnnounceNumber(tp,table.unpack(lvt))
-	Duel.RemoveCounter(tp,1,0,0xa95,lv,REASON_COST)
+	if Duel.GetCounter(tp,1,0,0xa95)>=lv*2 then
+		Duel.RemoveCounter(tp,1,0,0xa95,lv*2,REASON_COST)
+	end
 	e:SetLabel(lv)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK+LOCATION_GRAVE)
 end
 function c94020.thfilter2(c,lv)
 	return c:IsLocation(LOCATION_DECK+LOCATION_GRAVE)
-		and c:IsLevel(lv) and c:IsAbleToHand() and c:IsType(TYPE_NORMAL)
+		and c:IsLevel(lv) and c:IsAbleToHand() and c:IsSetCard(0x9401)
 end
 function c94020.thop(e,tp,eg,ep,ev,re,r,rp)
 	local lv=e:GetLabel()

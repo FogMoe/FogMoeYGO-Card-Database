@@ -51,11 +51,11 @@ function cm.linkcon(e)
 	return c:IsStatus(STATUS_SPSUMMON_TURN) and c:IsSummonType(SUMMON_TYPE_LINK)
 end
 function cm.lcheck(g,lc)
-	return g:IsExists(Card.IsLinkType,1,nil,TYPE_NORMAL)
+	return g:IsExists(Card.IsLinkSetCard,1,nil,0x9401)
 end
 function cm.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetCustomActivityCount(m,tp,ACTIVITY_SPSUMMON)==0 end
-	Duel.Recover(tp,2000,REASON_COST)
+	Duel.Recover(tp,1000,REASON_COST)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)

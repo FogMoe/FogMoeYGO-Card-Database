@@ -69,7 +69,7 @@ end
 
 
 function cm.drfilter(c)
-	return c:IsType(TYPE_NORMAL) or c:IsSetCard(0x9401) and c:IsAbleToDeck()
+	return c:IsSetCard(0x9401) and c:IsAbleToDeck()
 end
 function cm.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp)
@@ -99,8 +99,8 @@ function cm.chainlm(e,rp,tp)
 	return tp==rp
 end
 function cm.repfilter(c,tp)
-	return c:IsFaceup() and c:IsType(TYPE_NORMAL) and c:IsType(TYPE_MONSTER)
-		and c:IsOnField() and c:IsControler(tp) and c:IsReason(REASON_EFFECT+REASON_BATTLE) and not c:IsReason(REASON_REPLACE)
+	return c:IsFaceup() and c:IsSetCard(0x9401) and c:IsType(TYPE_MONSTER)
+		and c:IsOnField() and c:IsControler(tp) and c:IsReason(REASON_BATTLE) and not c:IsReason(REASON_REPLACE)
 end
 function cm.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDestructable() and eg:IsExists(cm.repfilter,1,nil,tp) end
