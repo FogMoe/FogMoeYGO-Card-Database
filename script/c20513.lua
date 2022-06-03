@@ -21,8 +21,11 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function cm.tgf1(c,tp)
-	return c:IsFaceup() and c:IsSetCard(0x3fd5) and (Duel.IsExistingMatchingCard(cm.opf1,tp,LOCATION_GRAVE,0,1,nil) 
+	return c:IsFaceup() and c:IsSetCard(0x3fd5) 
+--[[
+		and (Duel.IsExistingMatchingCard(cm.opf1,tp,LOCATION_GRAVE,0,1,nil) 
 		or (c:IsSSetable() and c:IsType(TYPE_SPELL+TYPE_TRAP)))
+--]]
 end
 function cm.tg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REMOVED) and chkc:IsControler(tp) and cm.tgf1(chkc,tp) end
