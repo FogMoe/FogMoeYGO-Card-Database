@@ -53,8 +53,7 @@ function c11103.tg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		if e:GetLabel()~=100 then return false end
 		e:SetLabel(0)
-		return e:GetHandler():IsAbleToRemoveAsCost()
-			and Duel.IsExistingMatchingCard(c11103.tfilter2,tp,LOCATION_GRAVE,0,1,nil)
+		return e:GetHandler():IsAbleToRemoveAsCost() and Duel.IsExistingMatchingCard(c11103.tfilter2,tp,LOCATION_GRAVE,0,1,nil)
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local mg=Duel.SelectMatchingCard(tp,c11103.tfilter2,tp,LOCATION_GRAVE,0,1,1,nil)
