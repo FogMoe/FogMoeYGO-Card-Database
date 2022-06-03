@@ -27,7 +27,7 @@ end
 function c11104.tg1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetMZoneCount(tp)>0
 		and Duel.IsExistingMatchingCard(c11104.tfilter1,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
-	Duel.RegisterFlagEffect(tp,1175101,RESET_PHASE+PHASE_END,0,1)
+	Duel.RegisterFlagEffect(tp,11101,RESET_PHASE+PHASE_END,0,1)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
 end
 function c11104.op1(e,tp,eg,ep,ev,re,r,rp)
