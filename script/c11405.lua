@@ -87,7 +87,7 @@ function cm.sprop(e,tp,eg,ep,ev,re,r,rp,c)
 end
 function cm.adcon(e,tp,eg,ep,ev,re,r,rp)
 	local ph=Duel.GetCurrentPhase()
-	return (ph==PHASE_MAIN1 or ph==PHASE_MAIN2) and Duel.GetTurnPlayer==1-tp
+	return (ph==PHASE_MAIN1 or ph==PHASE_MAIN2) and Duel.GetTurnPlayer()==1-tp
 end
 function cm.adcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetDecktopGroup(tp,1):FilterCount(Card.IsAbleToRemoveAsCost,nil,POS_FACEDOWN)==1 and Duel.GetMatchingGroupCount(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)>0 end

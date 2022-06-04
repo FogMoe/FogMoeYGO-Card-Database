@@ -49,7 +49,7 @@ end
 function cm.checkop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
 	while tc do
-	   if tc:GetOriginalCode()==66917000  then
+	   if tc:GetOriginalCode()==17000  then
 		Duel.RegisterFlagEffect(tc:GetSummonPlayer(),m,0,0,1)
 	   end
 	   tc=eg:GetNext()
