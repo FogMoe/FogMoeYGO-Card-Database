@@ -17,7 +17,7 @@ function cm.allneedfilter(c)
 	return c:IsFaceup() and c:IsCode(94020)
 end
 function cm.cfilter(c)
-	return c:IsType(TYPE_NORMAL) and not c:IsStatus(STATUS_BATTLE_DESTROYED)
+	return c:IsSetCard(0x9401) and not c:IsStatus(STATUS_BATTLE_DESTROYED)
 end
 function cm.chcon(e,tp,eg,ep,ev,re,r,rp)
 	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and rp==1-tp and 

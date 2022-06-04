@@ -21,7 +21,7 @@ function c94010.spfilter1(c,tp)
 	return c:IsLocation(LOCATION_MZONE+LOCATION_HAND) and c:IsReleasable() and c:IsType(TYPE_MONSTER)
 end
 function c94010.spfilter2(c)
-	return c:IsReleasable() and c:IsType(TYPE_MONSTER) 
+	return c:IsReleasable() and c:IsType(TYPE_MONSTER) and c:IsSetCard(0x9401)
 end
 function c94010.thfilter(c,tp)
 	return c:IsCode(94030)

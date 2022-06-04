@@ -11,7 +11,7 @@ function cm.initial_effect(c)
 	e0:SetRange(LOCATION_PZONE)
 	e0:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	e0:SetTarget(cm.atktg)
-	e0:SetValue(-300)
+	e0:SetValue(-700)
 	c:RegisterEffect(e0)
 	--to hand
 	local e1=Effect.CreateEffect(c)
