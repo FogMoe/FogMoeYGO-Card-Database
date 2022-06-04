@@ -1,6 +1,7 @@
 --霜雪术士
 local m=60023
 local cm=_G["c"..m]
+cm.name="霜雪术士"
 cm.isArkFog=true
 function cm.initial_effect(c)
 	--link summon

@@ -1,6 +1,7 @@
 --剧团之影
 local m=60026
 local cm=_G["c"..m]
+cm.name="剧团之影"
 cm.isArkFog=true
 function cm.initial_effect(c)
 	aux.AddXyzProcedure(c,nil,7,2)

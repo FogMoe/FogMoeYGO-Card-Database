@@ -1,6 +1,7 @@
 --兰登战术
 local m=60025
 local cm=_G["c"..m]
+cm.name="兰登战术"
 cm.isArkFog=true
 function cm.initial_effect(c)
 	--Activate

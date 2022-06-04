@@ -2,21 +2,19 @@
 local cm,m,o=GetID()
 function cm.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(m,0))
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	local e2=Effect.CreateEffect(c)
-	e2:SetDescription(aux.Stringid(m,1))
-	e2:SetType(EFFECT_TYPE_ACTIVATE)
-	e2:SetCode(EVENT_ATTACK_ANNOUNCE)
-	e2:SetCondition(cm.con2)
-	e2:SetCost(cm.cos2)
-	e2:SetOperation(cm.op2)
-	c:RegisterEffect(e2)
-	local e3=e2:Clone()
-	e3:SetType(EFFECT_TYPE_QUICK_O)
-	e3:SetRange(LOCATION_SZONE)
+	local e3=Effect.CreateEffect(c)
+	e3:SetDescription(aux.Stringid(m,0))
+	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e3:SetProperty(EFFECT_FLAG_DELAY)
+	e3:SetRange(LOCATION_GRAVE)
+	e3:SetCode(EVENT_REMOVE)
+	e3:SetCountLimit(1,m+o)
+	e3:SetCondition(cm.con3)
+	e3:SetTarget(cm.tg3)
+	e3:SetOperation(cm.op3)
 	c:RegisterEffect(e3)
 	local e4=Effect.CreateEffect(c)
 	e4:SetCategory(CATEGORY_SUMMON)
@@ -30,16 +28,18 @@ function cm.initial_effect(c)
 	e4:SetOperation(cm.op4)
 	c:RegisterEffect(e4)
 end
---e2
-function cm.con2(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetAttacker():IsControler(1-tp)
+--e3
+function cm.con3(e,tp,eg,ep,ev,re,r,rp)
+	return eg:IsExists(Card.IsSetCard,1,nil,0x6fd5)
 end
-function cm.cos2(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToHandAsCost() end
-	Duel.SendtoHand(e:GetHandler(),nil,REASON_COST)
+function cm.tg3(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():IsSSetable() end
 end
-function cm.op2(e,tp,eg,ep,ev,re,r,rp)
-	Duel.NegateAttack()
+function cm.op3(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if c:IsRelateToEffect(e) then
+		Duel.SSet(tp,c)
+	end
 end
 --e4
 function cm.con4(e,tp,eg,ep,ev,re,r,rp)
