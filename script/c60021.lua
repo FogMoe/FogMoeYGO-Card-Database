@@ -1,6 +1,7 @@
 --夜尽的轻鸣
 local m=60021
 local cm=_G["c"..m]
+cm.name="夜尽的轻鸣"
 cm.isArkFog=true
 function cm.initial_effect(c)
 	Duel.EnableGlobalFlag(GLOBALFLAG_SELF_TOGRAVE)

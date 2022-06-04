@@ -1,6 +1,7 @@
 --兰登修女
 local m=60024
 local cm=_G["c"..m]
+cm.name="兰登修女"
 cm.isArkFog=true
 function cm.initial_effect(c)
 	--equip
@@ -44,16 +45,12 @@ function cm.eqop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		e1:SetValue(cm.eqlimit)
 		tc:RegisterEffect(e1)
-		local atk=math.ceil(tc:GetBaseAttack()/2)
-		if atk>0 then
-			local e3=Effect.CreateEffect(c)
-			e3:SetType(EFFECT_TYPE_EQUIP)
-			e3:SetProperty(EFFECT_FLAG_OWNER_RELATE+EFFECT_FLAG_IGNORE_IMMUNE)
-			e3:SetCode(EFFECT_UPDATE_ATTACK)
-			e3:SetReset(RESET_EVENT+RESETS_STANDARD)
-			e3:SetValue(atk)
-			tc:RegisterEffect(e3)
+		local e2=Effect.CreateEffect(c)
+		e2:SetType(EFFECT_TYPE_EQUIP)
+		e2:SetCode(EFFECT_UPDATE_ATTACK)
+		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
+		e2:SetValue(atk/2)
+		tc:RegisterEffect(e2)
 		end
 		tc:RegisterFlagEffect(m,RESET_EVENT+RESETS_STANDARD,0,1)
-	end
 end

@@ -8,10 +8,11 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e1)
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(m,1))
+	e2:SetCategory(CATEGORY_TOGRAVE)
 	e2:SetType(EFFECT_TYPE_ACTIVATE)
 	e2:SetCode(EVENT_ATTACK_ANNOUNCE)
 	e2:SetCondition(cm.con2)
-	e2:SetCost(cm.cos2)
+	e2:SetTarget(cm.tg2)
 	e2:SetOperation(cm.op2)
 	c:RegisterEffect(e2)
 	local e3=e2:Clone()
@@ -33,12 +34,12 @@ end
 function cm.con2(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttacker():IsControler(1-tp)
 end
-function cm.cos2(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToHandAsCost() end
-	Duel.SendtoHand(e:GetHandler(),nil,REASON_COST)
+function cm.tg2(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():IsAbleToGrave() end
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,e:GetHandler(),1,tp,0)
 end
 function cm.op2(e,tp,eg,ep,ev,re,r,rp)
-	Duel.NegateAttack()
+	if Duel.NegateAttack() and e:GetHandler():IsOnField() then Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT) end
 end
 --e4
 function cm.con4(e,tp,eg,ep,ev,re,r,rp)

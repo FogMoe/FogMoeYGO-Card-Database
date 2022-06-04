@@ -1,6 +1,7 @@
 --黄铁刺杀者
 local m=60020
 local cm=_G["c"..m]
+cm.name="黄铁刺杀者"
 cm.isArkFog=true
 function cm.initial_effect(c)
 	--spirit return

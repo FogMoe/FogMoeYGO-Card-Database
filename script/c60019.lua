@@ -1,6 +1,7 @@
 --圣白的恶魔
 local m=60019
 local cm=_G["c"..m]
+cm.name="圣白的恶魔"
 cm.isArkFog=true
 function cm.initial_effect(c)
 	aux.AddCodeList(c,m-1)

@@ -1,6 +1,7 @@
 --「画中人」
 local m=60016
 local cm=_G["c"..m]
+cm.name="「画中人」"
 cm.isArkFog=true
 function cm.initial_effect(c)
 	--link summon
