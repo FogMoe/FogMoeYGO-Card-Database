@@ -51,7 +51,7 @@ function cm.cos4(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
 end
 function cm.tgf4(c)
-	return c:IsSetCard(0x3fd5) and c:IsSummonable(true,nil)
+	return c:IsRace(RACE_FIEND) and c:IsSummonable(true,nil)
 end
 function cm.tg4(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cm.tgf4,tp,LOCATION_HAND,0,1,nil) end
