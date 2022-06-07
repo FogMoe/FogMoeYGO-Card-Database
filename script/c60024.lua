@@ -17,7 +17,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function cm.eqfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:IsAbleToChangeControler()
+	return c:IsType(TYPE_MONSTER) and c:IsAbleToChangeControler()
 end
 function cm.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and cm.eqfilter(chkc) end

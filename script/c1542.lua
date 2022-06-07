@@ -97,8 +97,7 @@ function cm.PConditionFilter(c,e,tp,lscale,rscale,eset)
 		lv=c:GetLevel()
 	end
 	local bool=aux.PendulumSummonableBool(c)
-	return (c:IsLocation(LOCATION_HAND) or (c:IsFaceup() and c:IsType(TYPE_PENDULUM)) 
-			or (c:IsLocation(LOCATION_GRAVE) and c:IsSetCard(0x5f30) and Duel.GetFlagEffect(tp,1542)~=0))
+	return (c:IsLocation(LOCATION_HAND) or (c:IsFaceup() and c:IsType(TYPE_PENDULUM)) or (c:IsLocation(LOCATION_GRAVE) and c:IsSetCard(0x5f30) and Duel.GetFlagEffect(tp,1542)~=0))
 		and lv>lscale and lv<rscale and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,bool,bool)
 		and not c:IsForbidden()
 		and (aux.PendulumChecklist&(0x1<<tp)==0 or aux.PConditionExtraFilter(c,e,tp,lscale,rscale,eset))
@@ -196,7 +195,10 @@ function cm.condition(e,tp,eg,ep,ev,re,r,rp)
 	local b0=(Duel.IsExistingMatchingCard(cm.spfilter,tp,LOCATION_HAND+LOCATION_GRAVE,0,1,nil,e,tp))
 	local b1=(Duel.IsExistingMatchingCard(cm.thfilter,tp,LOCATION_DECK,0,1,nil))
 	local b2=(Duel.GetFlagEffect(tp,1542)==0 and (aux.PendulumChecklist&(0x1<<tp)==0 or #eset~=0))
-	return ((a0 and b0) or (a1 and b1) or (a2 and b2))
+	return
+		((a0 and b0) or
+		(a1 and b1) or
+		(a2 and b2))
 end
 function cm.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -230,7 +232,7 @@ function cm.activate(e,tp,eg,ep,ev,re,r,rp)
 	if a0 and b0 then
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(cm.filter),tp,LOCATION_GRAVE+LOCATION_HAND,0,1,1,nil,e,tp)
+		local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(cm.spfilter),tp,LOCATION_GRAVE+LOCATION_HAND,0,1,1,nil,e,tp)
 		local tc=g:GetFirst()
 		if not tc then return end
 		if Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)~=0 and tc:IsFacedown() then
