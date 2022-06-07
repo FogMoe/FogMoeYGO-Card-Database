@@ -69,7 +69,7 @@ function cm.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function cm.condition(e,tp,eg,ep,ev,re,r,rp)
 	local at=Duel.GetAttacker()
-	return at:IsControler(1-tp) and Duel.GetAttackTarget()==nil and Duel.GetLP(tp)<=3000 and Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==1
+	return at:IsControler(1-tp) and Duel.GetAttackTarget()==nil and Duel.GetLP(tp)<Duel.GetLP(1-tp) and Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==1
 end
 function cm.act(e,tp,eg,ep,ev,re,r,rp)  
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
