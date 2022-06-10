@@ -81,8 +81,9 @@ function cm.activate(e,tp,eg,ep,ev,re,r,rp)
 			if tc:GetType()==TYPE_MONSTER then
 				Duel.ChangePosition(tc,POS_FACEDOWN_DEFENSE)
 			elseif tc:GetType()==TYPE_TRAP or tc:GetType()==TYPE_SPELL then
-				Duel.ChangePosition(tc,POS_FACEDOWN)				
-		end		 
+				Duel.ChangePosition(tc,POS_FACEDOWN)
+			end
+		end	  
 	end
 end
 function cm.descon(e,tp,eg,ep,ev,re,r,rp)
