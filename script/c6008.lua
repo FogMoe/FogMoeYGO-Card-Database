@@ -77,13 +77,17 @@ end
 function cm.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.GetMatchingGroup(cm.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,e:GetHandler())
 	if sg:GetCount()>0 then
-		for tc in ipairs(sg) do
-			if tc:GetType()==TYPE_MONSTER then
-				Duel.ChangePosition(tc,POS_FACEDOWN_DEFENSE)
-			elseif tc:GetType()==TYPE_TRAP or tc:GetType()==TYPE_SPELL then
-				Duel.ChangePosition(tc,POS_FACEDOWN)
+		local tc=sg:GetFirst()
+		local i=0
+		while(i<sg:GetCount()) do
+			if tc:IsType(TYPE_MONSTER) then
+			   Duel.ChangePosition(tc,POS_FACEDOWN_DEFENSE)
+			elseif tc:IsType(TYPE_SPELL+TYPE_TRAP) then
+			   Duel.ChangePosition(tc,POS_FACEDOWN)
 			end
-		end	  
+			i=i+1
+			tc=sg:GetNext()
+		end
 	end
 end
 function cm.descon(e,tp,eg,ep,ev,re,r,rp)
