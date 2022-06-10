@@ -22,6 +22,9 @@ function cm.initial_effect(c)
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_CANNOT_SUMMON)
 	c:RegisterEffect(e3)
+	local e4=e2:Clone()
+	e4:SetValue(SUMMON_TYPE_PENDULUM)
+	c:RegisterEffect(e4)
 	--cannot activate
 	local e8=Effect.CreateEffect(c)
 	e8:SetType(EFFECT_TYPE_FIELD)
@@ -74,7 +77,12 @@ end
 function cm.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.GetMatchingGroup(cm.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,e:GetHandler())
 	if sg:GetCount()>0 then
-		Duel.ChangePosition(sg,POS_FACEDOWN)
+		for tc in ipairs(sg) do
+			if tc:GetType()==TYPE_MONSTER then
+				Duel.ChangePosition(tc,POS_FACEDOWN_DEFENSE)
+			elseif tc:GetType()==TYPE_TRAP or tc:GetType()==TYPE_SPELL then
+				Duel.ChangePosition(tc,POS_FACEDOWN)				
+		end		 
 	end
 end
 function cm.descon(e,tp,eg,ep,ev,re,r,rp)
