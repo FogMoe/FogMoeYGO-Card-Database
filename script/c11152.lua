@@ -56,7 +56,7 @@ function c11152.cost6(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsReleasable() end
 	Duel.Release(e:GetHandler(),REASON_COST)
 end
-function c11152.tg6(e,tp,eg,ep,ev,re,r,rp)
+function c11152.tg6(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_DECK,0,1,nil,11165) end
 end
 function c11152.op6(e,tp,eg,ep,ev,re,r,rp)
