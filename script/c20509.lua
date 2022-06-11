@@ -25,7 +25,8 @@ function cm.con2(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttacker():IsControler(1-tp)
 end
 function cm.tg2(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToHand() end
+	if chk==0 then return e:GetHandler():IsAbleToHand() and e:GetHandler():GetFlagEffect(m)==0 end
+	e:GetHandler():RegisterFlagEffect(m,RESET_CHAIN,0,1)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,e:GetHandler(),1,tp,0)
 end
 function cm.op2(e,tp,eg,ep,ev,re,r,rp)
