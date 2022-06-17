@@ -49,6 +49,7 @@ end
 function c11152.op1(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local sg=Duel.SelectMatchingCard(tp,c11152.cfilter1,tp,LOCATION_HAND,0,1,1,nil)
+	Duel.ConfirmCards(1-tp,sg)
 	Duel.SendtoDeck(sg,nil,2,REASON_COST)
 end
 --
