@@ -1,0 +1,32 @@
+--进击之根绝者
+local cm,m,o=GetID()
+if not pcall(function() require("expansions/script/c20650") end) then require("script/c20650") end
+function cm.initial_effect(c)
+	local e1=fu_Dlit.cont(c,1000)
+	local e2=Effect.CreateEffect(c)
+	e2:SetDescription(aux.Stringid(m,0))
+	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e2:SetCode(EVENT_BATTLE_DESTROYING)
+	e2:SetCountLimit(1)
+	e2:SetCondition(aux.bdocon)
+	e2:SetOperation(cm.op)
+	c:RegisterEffect(e2)
+end
+function cm.op(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if c:IsFacedown() or not c:IsRelateToEffect(e) then return end
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_SET_ATTACK_FINAL)
+	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+	e1:SetValue(math.ceil(c:GetAttack()/2))
+	c:RegisterEffect(e1)
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_SINGLE)
+	e2:SetCode(EFFECT_EXTRA_ATTACK)
+	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+	e2:SetValue(1)
+	c:RegisterEffect(e2)
+end

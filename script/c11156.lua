@@ -22,12 +22,6 @@ end
 function c11156.op1(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.GetMatchingGroup(c11156.tfilter1,tp,LOCATION_MZONE,0,nil)
 	for tc in aux.Next(sg) do
-		Duel.NegateRelatedChain(tc,RESET_TURN_SET)
-		local e1=Effect.CreateEffect(e:GetHandler())
-		e1:SetType(EFFECT_TYPE_SINGLE)
-		e1:SetCode(EFFECT_DISABLE)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
-		tc:RegisterEffect(e1)
 		local e2=Effect.CreateEffect(e:GetHandler())
 		e2:SetType(EFFECT_TYPE_SINGLE)
 		e2:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
