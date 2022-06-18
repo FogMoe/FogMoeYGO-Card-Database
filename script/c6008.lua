@@ -22,9 +22,6 @@ function cm.initial_effect(c)
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_CANNOT_SUMMON)
 	c:RegisterEffect(e3)
-	local e4=e2:Clone()
-	e4:SetValue(SUMMON_TYPE_PENDULUM)
-	c:RegisterEffect(e4)
 	--cannot activate
 	local e8=Effect.CreateEffect(c)
 	e8:SetType(EFFECT_TYPE_FIELD)
@@ -51,7 +48,7 @@ end
 
 
 function cm.splimit(e,c)
-	return c:IsPosition(POS_FACEDOWN) and c:IsFacedown()
+	return c:GetPosition()~=POS_FACEUP
 end
 function cm.filter(c,e,tp)
 	return c:IsFaceup() and c:IsCanTurnSet() and not c:IsLocation(LOCATION_PZONE) and not c:IsType(TYPE_LINK) and not c:IsType(TYPE_TOKEN)
