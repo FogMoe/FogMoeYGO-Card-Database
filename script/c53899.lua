@@ -22,7 +22,7 @@ function cm.initial_effect(c)
 	e3:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_PLAYER_TARGET)
 	e3:SetCondition(cm.setcon)
 	e3:SetTarget(cm.settg)
-	e3:SetOperation(cm.settg)
+	e3:SetOperation(cm.setop)
 	c:RegisterEffect(e3)
 	local e4=e3:Clone()
 	e4:SetCode(EVENT_REMOVE)
@@ -41,7 +41,7 @@ end
 function cm.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cm.filter,tp,LOCATION_DECK,0,1,nil) end
 end
-function cm.settg(e,tp,eg,ep,ev,re,r,rp)
+function cm.setop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,cm.filter,tp,LOCATION_DECK,0,1,1,nil)
 	if g:GetCount()>0 then Duel.SSet(tp,g:GetFirst()) end
