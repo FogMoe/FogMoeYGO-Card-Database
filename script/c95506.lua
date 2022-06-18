@@ -33,8 +33,9 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e2)
 	--disable
 	local e4=Effect.CreateEffect(c)
-	e4:SetType(EFFECT_TYPE_CONTINUOUS)
+	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetRange(LOCATION_FZONE)
+	e4:SetTargetRange(0,LOCATION_MZONE)
 	e4:SetOperation(cm.operation)
 	c:RegisterEffect(e4)
 end
@@ -42,6 +43,7 @@ function cm.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tg=Duel.GetMatchingGroup(Card.IsSetCard(0x9901),tp,0,LOCATION_MZONE,nil)
 	local tc=tg:GetFirst()
+	while tc do
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -66,7 +68,8 @@ function cm.operation(e,tp,eg,ep,ev,re,r,rp)
 		local e6=e1:Clone()
 		e6:SetCode(EFFECT_CANNOT_BE_LINK_MATERIAL)
 		tc:RegisterEffect(e6)
-	tc=tg:GetNext()
+		tc=tg:GetNext()
+	end
 end
 function cm.fuslimit(e,c,sumtype)
 	return sumtype==SUMMON_TYPE_FUSION
