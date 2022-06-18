@@ -48,5 +48,5 @@ function cm.op1(e,tp,eg,ep,ev,re,r,rp)
 end
 --e2
 function cm.val2(e,c)
-	return Duel.GetMatchingGroup(Card.IsSetCard,e:GetHandlerPlayer(),LOCATION_REMOVED,0,nil,0x3fd5):FilterCount(Card.IsFaceup,nil)*300
+	return Duel.GetMatchingGroup(Card.IsSetCard,e:GetHandlerPlayer(),LOCATION_REMOVED,0,nil,0x6fd5):FilterCount(Card.IsFaceup,nil)*300
 end

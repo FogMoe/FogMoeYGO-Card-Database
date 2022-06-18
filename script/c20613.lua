@@ -29,7 +29,7 @@ function cm.cos1(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function cm.op1(e,tp,eg,ep,ev,re,r,rp)
 	local at=Duel.GetAttacker()
-	if at and at:GetAttack()>0 and at:IsRelateToBattle() and c:IsFaceup() then
+	if at and at:GetAttack()>0 and at:IsRelateToBattle() and at:IsFaceup() then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_SET_ATTACK_FINAL)
