@@ -16,7 +16,7 @@ function cm.initial_effect(c)
 	--rm
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(m,0))
-	e4:SetCategory(CATEGORY_REMOVE)
+	e4:SetCategory(CATEGORY_TOGRAVE)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e4:SetRange(LOCATION_GRAVE)
 	e4:SetCode(EVENT_PHASE+PHASE_END)
@@ -32,12 +32,29 @@ end
 function cm.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cm.disfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,0,0)
 end
 function cm.disop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,cm.disfilter,tp,LOCATION_DECK,0,1,1,nil)
-	if g:GetCount()>0 then Duel.Remove(g,POS_FACEDOWN,REASON_EFFECT) end
+	if g:GetCount()>0 then 
+		Duel.SendtoGrave(g,REASON_EFFECT) 
+		local tc=g:GetFirst()
+		if tc:IsLocation(LOCATION_GRAVE) then
+			local e1=Effect.CreateEffect(e:GetHandler())
+			e1:SetType(EFFECT_TYPE_FIELD)
+			e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+			e1:SetCode(EFFECT_CANNOT_ACTIVATE)
+			e1:SetTargetRange(1,0)
+			e1:SetValue(cm.aclimit)
+			e1:SetLabel(tc:GetCode())
+			e1:SetReset(RESET_PHASE+PHASE_END)
+			Duel.RegisterEffect(e1,tp)
+		end
+	end
+end
+function cm.aclimit(e,re,tp)
+	return re:GetHandler():IsCode(e:GetLabel())
 end
 
 
