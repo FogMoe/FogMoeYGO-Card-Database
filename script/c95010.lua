@@ -56,16 +56,16 @@ function cm.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,0,0,tp,1500)
 end
 function cm.activate(e,tp,eg,ep,ev,re,r,rp)
-	local tc=Duel.GetFirstTarget()
-	if not tc:IsRelateToEffect(e) then return end
-	local att=tc:GetAttribute()
+	local tcc=Duel.GetFirstTarget()
+	if not tcc:IsRelateToEffect(e) then return end
+	local att=tcc:GetAttribute()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_OPERATECARD)
 	local sg=Duel.SelectMatchingCard(tp,cm.tfilter,tp,LOCATION_DECK,0,1,1,nil,att,e,tp,nil)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local tc=sg:GetFirst()
-	if tc and tc:IsFaceup() then
+	if tc and tcc:IsFaceup() then
 		if tc:IsAbleToHand() and (not tc:IsCanBeSpecialSummoned(e,0,tp,false,false) or ft<=0 or Duel.SelectOption(tp,1190,1152)==0) then
-			Duel.SendtoHand(tc,nil,REASON_EFFECT)
+			Duel.SendtoHand(tc,tp,REASON_EFFECT)
 			Duel.ConfirmCards(1-tp,tc)
 		else
 			Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
