@@ -15,6 +15,17 @@ function fu_Mugettsu.graveSP(c,code)
 	e:SetTarget(fu_Mugettsu.graveSP_tg)
 	e:SetOperation(fu_Mugettsu.graveSP_op)
 	c:RegisterEffect(e)
+	local cm=_G["c"..code]
+	if not cm.global_check then
+		cm.global_check=true
+		local ge=Effect.GlobalEffect()
+		ge:SetType(EFFECT_TYPE_FIELD)
+		ge:SetCode(EFFECT_TO_GRAVE_REDIRECT)
+		ge:SetTargetRange(LOCATION_OVERLAY,LOCATION_OVERLAY)
+		ge:SetTarget(aux.TargetBoolFunction(Card.IsCode,code))
+		ge:SetValue(LOCATION_REMOVED)
+		Duel.RegisterEffect(ge,0)
+	end
 	return e
 end
 --fu_Mugettsu.graveSP
@@ -27,8 +38,14 @@ function fu_Mugettsu.graveSP_tg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function fu_Mugettsu.graveSP_op(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) then
-		Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
+	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)>0 then
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_LEAVE_FIELD_REDIRECT)
+		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD)
+		e1:SetValue(LOCATION_REMOVED)
+		c:RegisterEffect(e1)
 	end
 end
 --

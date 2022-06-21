@@ -66,7 +66,7 @@ function fu_Dlit.cont_op(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function fu_Dlit.cont_op_tg3(e,c)
-	return fu_Dlit.is_Dlit(c) and e:GetHandler():GetSequence()==aux.MZoneSequence(c:GetSequence())
+	return e:GetHandler():GetSequence()==aux.MZoneSequence(c:GetSequence())
 end
 function fu_Dlit.cont_op_conf4(c,tp,seq)
 	if c:IsPreviousControler(1-tp) or not c:GetPreviousLocation()==LOCATION_MZONE then return false end

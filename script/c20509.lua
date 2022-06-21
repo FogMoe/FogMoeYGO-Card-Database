@@ -8,7 +8,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e1)
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(m,1))
-	e2:SetCategory(CATEGORY_TOHAND)
+	e2:SetCategory(CATEGORY_HANDES+CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_ACTIVATE)
 	e2:SetCode(EVENT_ATTACK_ANNOUNCE)
 	e2:SetCondition(cm.con2)
@@ -25,10 +25,10 @@ function cm.con2(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttacker():IsControler(1-tp)
 end
 function cm.tg2(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToHand() and e:GetHandler():GetFlagEffect(m)==0 end
-	e:GetHandler():RegisterFlagEffect(m,RESET_CHAIN,0,1)
+	if chk==0 then return e:GetHandler():IsAbleToHand() and Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)>0 end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,e:GetHandler(),1,tp,0)
 end
 function cm.op2(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.NegateAttack() and e:GetHandler():IsOnField() then Duel.SendtoHand(e:GetHandler(),nil,REASON_EFFECT) end
+	if Duel.DiscardHand(tp,nil,1,1,REASON_EFFECT+REASON_DISCARD)>0 and Duel.NegateAttack() 
+		and e:GetHandler():IsRelateToEffect(e) and e:GetHandler():IsOnField() then Duel.SendtoHand(e:GetHandler(),nil,REASON_EFFECT) end
 end
