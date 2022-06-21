@@ -82,9 +82,9 @@ end
 function cm.activate(e)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and tc:IsDefensePos() then
-		if Duel.SendtoHand(tc,nil,REASON_EFFECT) and Duel.SelectYesNo(e:GetHandler():GetOwner(),aux.Stringid(m,2)) and Duel.IsExistingMatchingCard(cm.jixiehua,tp,LOCATION_HAND,0,1,nil) then
+		if Duel.SendtoHand(tc,nil,REASON_EFFECT) and Duel.SelectYesNo(e:GetHandler():GetOwner(),aux.Stringid(m,2)) and Duel.IsExistingMatchingCard(cm.jixiehua,e:GetHandler():GetOwner(),LOCATION_HAND,0,1,nil) then
 			Duel.BreakEffect()
-			local gc=Duel.SelectMatchingCard(tp,cm.jixiehua,tp,LOCATION_HAND,0,1,1,nil)
+			local gc=Duel.SelectMatchingCard(e:GetHandler():GetOwner(),cm.jixiehua,e:GetHandler():GetOwner(),LOCATION_HAND,0,1,1,nil)
 			Duel.SendtoGrave(gc,REASON_EFFECT)
 		end  
 	end
