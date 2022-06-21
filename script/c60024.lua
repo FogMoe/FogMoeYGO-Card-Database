@@ -49,8 +49,18 @@ function cm.eqop(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetType(EFFECT_TYPE_EQUIP)
 		e2:SetCode(EFFECT_UPDATE_ATTACK)
 		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
-		e2:SetValue(atk/2)
+		e2:SetValue(atk)
 		tc:RegisterEffect(e2)
+		local atk=math.ceil(tc:GetBaseAttack()/2)
+		if atk>0 then
+			local e3=Effect.CreateEffect(c)
+			e3:SetType(EFFECT_TYPE_EQUIP)
+			e3:SetProperty(EFFECT_FLAG_OWNER_RELATE+EFFECT_FLAG_IGNORE_IMMUNE)
+			e3:SetCode(EFFECT_UPDATE_ATTACK)
+			e3:SetReset(RESET_EVENT+RESETS_STANDARD)
+			e3:SetValue(atk)
+			tc:RegisterEffect(e3)
 		end
 		tc:RegisterFlagEffect(m,RESET_EVENT+RESETS_STANDARD,0,1)
+	end
 end

@@ -74,11 +74,12 @@ function cm.spop(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetValue(-lv)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_DISABLE)
 			c:RegisterEffect(e1)
+			c:RegisterFlagEffect(31633,RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD,0,1)
 		end
 	end
 end
 function cm.descon(e,tp,eg,ep,ev,re,r,rp)
-	return re and re==cm.sp_effect
+	return (re and re==cm.sp_effect) or e:GetHandler():GetFlagEffect(31633)>0
 end
 function cm.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsOnField() end

@@ -42,7 +42,7 @@ function cm.thop1(e,tp,eg,ep,ev,re,r,rp)
 end
 function cm.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return re:GetHandler():IsCode(m+4) or (ep==tp and re:GetHandler():IsSetCard(0x612) and re:GetHandler():IsType(TYPE_MONSTER) and not re:GetHandler():IsCode(m+4))
+	return re:GetHandler():IsCode(m+4) or (ep==tp and re:GetHandler():IsSetCard(0x612) and re:GetHandler():IsType(TYPE_MONSTER) and not re:GetHandler():IsCode(m))
 end
 function cm.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
