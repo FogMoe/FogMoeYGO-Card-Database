@@ -36,7 +36,8 @@ end
 --
 function c11151.con2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c==Duel.GetAttacker() or c==Duel.GetAttackTarget()
+	return (c==Duel.GetAttacker() or c==Duel.GetAttackTarget())
+		and Duel.GetAttackTarget()~=nil
 end
 function c11151.cost2(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)

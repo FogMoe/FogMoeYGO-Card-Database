@@ -1,0 +1,48 @@
+--气势斗争
+local cm,m,o=GetID()
+function cm.initial_effect(c)
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_ACTIVATE)
+	e1:SetCode(EVENT_FREE_CHAIN)
+	c:RegisterEffect(e1)
+	local e2=Effect.CreateEffect(c)
+	e2:SetCategory(CATEGORY_ATKCHANGE)
+	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
+	e2:SetRange(LOCATION_SZONE)
+	e2:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
+	e2:SetCondition(cm.condition)
+	e2:SetOperation(cm.activate)
+	c:RegisterEffect(e2)
+end
+function cm.condition(e,tp,eg,ep,ev,re,r,rp)
+	local a=Duel.GetAttacker()
+	local d=Duel.GetAttackTarget()
+	return a and d and a:IsAttackPos() and d:IsAttackPos()
+end
+function cm.activate(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local a=Duel.GetAttacker()
+	local d=Duel.GetAttackTarget()
+	if a:IsFaceup() and a:IsRelateToBattle() and d:IsFaceup() and d:IsRelateToBattle() then
+		if d:IsControler(tp) then 
+			a=Duel.GetAttackTarget()
+			d=Duel.GetAttacker()
+		end
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_UPDATE_ATTACK)
+		e1:SetValue(Duel.GetMatchingGroupCount(nil,tp,LOCATION_MZONE,0,nil)*500)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_DAMAGE_CAL)
+		a:RegisterEffect(e1)
+		local e2=e1:Clone()
+		e2:SetValue(Duel.GetMatchingGroupCount(nil,tp,0,LOCATION_MZONE,nil)*500)
+		d:RegisterEffect(e2)
+		local e2=Effect.CreateEffect(c)
+		e2:SetType(EFFECT_TYPE_FIELD)
+		e2:SetCode(EFFECT_AVOID_BATTLE_DAMAGE)
+		e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+		e2:SetTargetRange(1,1)
+		e2:SetReset(RESET_PHASE+PHASE_DAMAGE)
+		Duel.RegisterEffect(e2,tp)
+	end
+end

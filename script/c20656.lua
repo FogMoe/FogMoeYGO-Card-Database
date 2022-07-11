@@ -2,7 +2,7 @@
 local cm,m,o=GetID()
 if not pcall(function() require("expansions/script/c20650") end) then require("script/c20650") end
 function cm.initial_effect(c)
-	local e1=fu_Dlit.cont(c,900)
+	local e1=fu_Dlit.cont(c,450)
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(m,0))
 	e2:SetCategory(CATEGORY_DAMAGE)
