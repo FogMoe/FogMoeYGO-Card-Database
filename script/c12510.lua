@@ -47,25 +47,28 @@ function cm.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Equip(tp,e:GetHandler(),tc)
 	end
 end
+function cm.atkcon(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local bc=c:GetBattleTarget()
+	return bc and bc:IsRace(RACE_FIEND) and bc:GetAttack()>0
+end
 function cm.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:GetFlagEffect(m)==0 end
 	c:RegisterFlagEffect(m,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_DAMAGE_CAL,0,1)
 end
-function cm.atkcon(e)
-	if Duel.GetCurrentPhase()~=PHASE_DAMAGE_CAL then return false end
-	local ec=e:GetHandler():GetEquipTarget()
-	local a=Duel.GetAttacker()
-	local d=Duel.GetAttackTarget()
-	return (d:IsRace(RACE_FIEND) and d==ec) or a==ec
+function cm.atkop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local bc=c:GetBattleTarget()
+	if c:IsRelateToBattle() and c:IsFaceup() and bc:IsRelateToBattle() and bc:IsFaceup() then
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_UPDATE_ATTACK)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_DAMAGE_CAL)
+		e1:SetValue(bc:GetAttack())
+		c:RegisterEffect(e1)
+	end
 end
-function cm.atkval(e)
-	local ec=e:GetHandler():GetEquipTarget()
-	if ec==Duel.GetAttacker() then dt=Duel.GetAttackTarget()
-	elseif ec==Duel.GetAttackTarget() then dt=Duel.GetAttacker() end
-	return math.min(dt:GetAttack())
-end
-
 
 
 
