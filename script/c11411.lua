@@ -1,7 +1,7 @@
 --波动中枢·物质波调谐器
 local m=11411
 local cm=_G["c"..m]
-local prime={2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107,109,113,127,131,137,139,149,151,157,163,167,173,179,181,191,193,197,199,211,223,227,229,233,239,241,251,257,263,269,271,277,281,283,293,307,311,313,317,331,337,347,349,353,359,367,373,379,383,389,397,401,409,419,421,431,433,439,443,449,457,461,463,467,479,487,491,499,503,509,521,523,541,547,557,563,569,571,577,587,593,599,601,607,613,617,619,631,641,643,647,653,659,661,673,677,683,691,701,709,719,727,733,739,743,751,757,761,769,773,787,797,809,811,821,823,827,829,839,853,857,859,863,877,881,883,887,907,911,919,929,937,941,947,953,967,971,977,983,991,997}
+--local prime={2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107,109,113,127,131,137,139,149,151,157,163,167,173,179,181,191,193,197,199,211,223,227,229,233,239,241,251,257,263,269,271,277,281,283,293,307,311,313,317,331,337,347,349,353,359,367,373,379,383,389,397,401,409,419,421,431,433,439,443,449,457,461,463,467,479,487,491,499,503,509,521,523,541,547,557,563,569,571,577,587,593,599,601,607,613,617,619,631,641,643,647,653,659,661,673,677,683,691,701,709,719,727,733,739,743,751,757,761,769,773,787,797,809,811,821,823,827,829,839,853,857,859,863,877,881,883,887,907,911,919,929,937,941,947,953,967,971,977,983,991,997}
 function cm.initial_effect(c)
 	--link summon
 	c:EnableReviveLimit()
@@ -49,8 +49,8 @@ function cm.hint(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.SelectYesNo(tp,aux.Stringid(m,0)) then
 		local e3=Effect.CreateEffect(e:GetHandler())
 		e3:SetDescription(aux.Stringid(m,1))
-		e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-		e3:SetCode(EVENT_FREE_CHAIN)
+		e3:SetType(EFFECT_TYPE_FIELD)
+		e3:SetCode(EFFECT_SPSUMMON_PROC_G)
 		e3:SetCondition(cm.debcon)
 		e3:SetOperation(cm.debug)
 		Duel.RegisterEffect(e3,tp)
@@ -69,13 +69,10 @@ function cm.mzfilter(c)
 end
 function cm.isprime(num)
 	if num<2 then return false elseif num==2 then return true end
-	local i=1
-	while i<=168 do
-		if num==prime[i] then return true end
-		if num<prime[i] then return false end
-		i=i+1
+	for i=2,(num-1) do
+		if num%i==0 then return false end
 	end
-	return false
+	return true
 end
 function cm.spcon(e,c)
 	local g=Duel.GetMatchingGroup(Card.IsFaceup,0,LOCATION_MZONE,LOCATION_MZONE,nil)
