@@ -49,6 +49,10 @@ function c95512.initial_effect(c)
 	e4:SetOperation(cm.nameop)
 	c:RegisterEffect(e4)
 end
+
+function cm.ctfilter(c)
+	return c:IsSetCard(0x9901) and c:IsType(TYPE_MONSTER) and c:IsFaceup() and c:IsLocation(LOCATION_MZONE)
+end
 function cm.jixiehua(c)
 	return c:IsSetCard(0x9901) and c:IsAbleToGrave() and c:IsType(TYPE_MONSTER)
 end
@@ -56,7 +60,7 @@ function cm.filter1(c,e,tp)
 	return c:IsType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,1-tp) and c:IsSetCard(0x9901)
 end
 function cm.target1(e,tp,eg,ep,ev,re,r,rp,chk)
-	local ct=Duel.GetMatchingGroupCount(Card.IsType,tp,0,LOCATION_MZONE,nil,TYPE_MONSTER)
+	local ct=Duel.GetMatchingGroupCount(cm.ctfilter,tp,0,LOCATION_MZONE,nil)
 	if chk==0 then return ct>=0 and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0
 		and Duel.IsExistingMatchingCard(cm.filter1,tp,LOCATION_DECK,0,1,nil,e,tp) end
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
@@ -76,7 +80,7 @@ function cm.activate1(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function cm.target2(e,tp,eg,ep,ev,re,r,rp,chk)
-	local ct=Duel.GetMatchingGroupCount(Card.IsType,tp,0,LOCATION_MZONE,nil,TYPE_MONSTER)
+	local ct=Duel.GetMatchingGroupCount(cm.ctfilter,tp,0,LOCATION_MZONE,nil)
 	if chk==0 then return ct>0 and Duel.IsPlayerCanDiscardDeck(tp,5) end
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 	Duel.SetTargetPlayer(tp)
@@ -100,7 +104,7 @@ function cm.filter3(c)
 	return c:IsControlerCanBeChanged() and c:IsSetCard(0x9901)
 end
 function cm.target3(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local ct=Duel.GetMatchingGroupCount(Card.IsType,tp,0,LOCATION_MZONE,nil,TYPE_MONSTER)
+	local ct=Duel.GetMatchingGroupCount(cm.ctfilter,tp,0,LOCATION_MZONE,nil)
 	if chkc then return chkc:GetLocation()==LOCATION_MZONE and chkc:GetControler()~=tp and chkc:IsControlerCanBeChanged() end
 	if chk==0 then return ct>1 and Duel.IsExistingTarget(cm.filter3,tp,0,LOCATION_MZONE,1,nil) end
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
@@ -133,6 +137,7 @@ function cm.activate3(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetLabelObject(g)
 	e2:SetCondition(cm.descon)
 	e2:SetOperation(cm.desop)
+	e2:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e2,tp)  
 end
 function cm.desfilter(c)
