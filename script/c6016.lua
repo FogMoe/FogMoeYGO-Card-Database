@@ -32,11 +32,16 @@ end
 function cm.sfilter(c,atk)
 	return c:IsAttackBelow(atk) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()  and c:IsRace(RACE_MACHINE)
 end
+function cm.tfilter(c,tatk)
+	return c:IsAttackBelow(tatk) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()  and c:IsRace(RACE_MACHINE)
+end
 function cm.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and cm.filter(chkc) end
 	if chk==0 then return Duel.IsExistingTarget(cm.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectTarget(tp,cm.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
+	local tatk=g:GetFirst():GetAttack()
+	if Duel.IsExistingMatchingCard(cm.tfilter,tp,LOCATION_DECK,0,1,nil,tatk)==0 then return false end
 	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end

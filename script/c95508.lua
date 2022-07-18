@@ -27,7 +27,6 @@ function cm.initial_effect(c)
 	e4:SetCost(aux.bfgcost)
 	e4:SetTarget(cm.distg)
 	e4:SetCondition(cm.setcon)
-	e4:SetHintTiming(TIMING_END_PHASE)
 	e4:SetOperation(cm.disop)
 	c:RegisterEffect(e4)
 	--cannot attack

@@ -68,7 +68,7 @@ end
 
 function cm.e3filter(c)
 	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0x9901) and 
-	c:IsControlerCanBeChanged()
+	c:IsControlerCanBeChanged() and c:IsFaceup()
 end
 function cm.desfilter(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP)
