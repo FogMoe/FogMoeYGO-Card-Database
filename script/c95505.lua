@@ -50,7 +50,7 @@ end
 function cm.checkop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
 	while tc do
-		if (tc:IsPreviousLocation(LOCATION_MZONE) or tc:IsPreviousLocation(LOCATION_HAND)) and tc:IsSetCard(0x9901) and tc:IsType(TYPE_MONSTER) then
+		if (tc:IsPreviousLocation(LOCATION_MZONE) or tc:IsPreviousLocation(LOCATION_HAND)) and tc:IsSetCard(0x9901) and tc:IsType(TYPE_MONSTER) and tc:IsControler(tp) then
 				cm.counter=cm.counter+1
 					Duel.RegisterFlagEffect(0,m-100,RESET_PHASE+PHASE_END,0,1)
 		end

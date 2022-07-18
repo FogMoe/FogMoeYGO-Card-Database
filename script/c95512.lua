@@ -5,6 +5,7 @@ function c95512.initial_effect(c)
 		--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(m,1))
+	e1:SetHintTiming(TIMING_END_PHASE)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
@@ -45,7 +46,6 @@ function c95512.initial_effect(c)
 	e4:SetCost(aux.bfgcost)
 	e4:SetTarget(cm.nametg)
 	e4:SetCondition(cm.setcon)
-	e4:SetHintTiming(TIMING_END_PHASE)
 	e4:SetOperation(cm.nameop)
 	c:RegisterEffect(e4)
 end
@@ -101,7 +101,7 @@ function cm.activate2(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function cm.filter3(c)
-	return c:IsControlerCanBeChanged() and c:IsSetCard(0x9901)
+	return c:IsControlerCanBeChanged() and c:IsSetCard(0x9901) and c:IsFaceup()
 end
 function cm.target3(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ct=Duel.GetMatchingGroupCount(cm.ctfilter,tp,0,LOCATION_MZONE,nil)

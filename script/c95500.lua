@@ -77,7 +77,7 @@ function cm.ctop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=g:GetFirst()
 	if not tc then return end
 	if Duel.GetControl(tc,tp)~=0 then
-		if not tc:IsSetCard(0x9901) then
+		if tc:IsFacedown() or not tc:IsSetCard(0x9901) then
 			Duel.Destroy(tc,REASON_EFFECT)
 		end
 	end
