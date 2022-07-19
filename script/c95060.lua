@@ -72,7 +72,7 @@ function cm.tktg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function cm.tkop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0
-		or not Duel.IsPlayerCanSpecialSummonMonster(tp,95065,0x9500,0x4011,0,0,1,RACE_PSYCHO,ATTRIBUTE_EARTH) then return end
+		or not Duel.IsPlayerCanSpecialSummonMonster(tp,95065,0x9500,0x4011,1200,1700,4,RACE_PSYCHO,ATTRIBUTE_EARTH) then return end
 	Duel.SendtoHand(e:GetHandler(),nil,REASON_EFFECT)
 	local token=Duel.CreateToken(tp,95065)
 	Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEUP)
