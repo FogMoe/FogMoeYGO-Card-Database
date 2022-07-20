@@ -36,6 +36,7 @@ function c95712.initial_effect(c)
 	e9:SetCategory(CATEGORY_DEFCHANGE)
 	e9:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e9:SetCode(EVENT_BATTLE_DESTROYING)
+	e9:SetCountLimit(1)
 	e9:SetOperation(cm.atkop)
 	c:RegisterEffect(e9)
 end
