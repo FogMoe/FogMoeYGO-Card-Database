@@ -27,6 +27,13 @@ function c95707.initial_effect(c)
 	e2:SetValue(cm.repval)
 	e2:SetOperation(cm.repop)
 	c:RegisterEffect(e2)
+		--Equip limit
+	local e9=Effect.CreateEffect(c)
+	e9:SetType(EFFECT_TYPE_SINGLE)
+	e9:SetCode(EFFECT_EQUIP_LIMIT)
+	e9:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e9:SetValue(cm.eqlimit)
+	c:RegisterEffect(e9)
 end
 function cm.indcon(e)
 	return e:GetHandler():GetEquipTarget():GetDefense()<2500

@@ -23,6 +23,13 @@ function c95708.initial_effect(c)
 	e6:SetCode(EFFECT_EXTRA_ATTACK_MONSTER)
 	e6:SetValue(1)
 	c:RegisterEffect(e6)
+		--Equip limit
+	local e9=Effect.CreateEffect(c)
+	e9:SetType(EFFECT_TYPE_SINGLE)
+	e9:SetCode(EFFECT_EQUIP_LIMIT)
+	e9:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e9:SetValue(cm.eqlimit)
+	c:RegisterEffect(e9)
 end
 function cm.atkval(e,c)
 	return Duel.GetMatchingGroupCount(cm.filter,c:GetControler(),LOCATION_ONFIELD,0,nil)*400
