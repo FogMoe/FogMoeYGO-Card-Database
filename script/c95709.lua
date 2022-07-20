@@ -33,6 +33,13 @@ function c95709.initial_effect(c)
 	local e4=e2:Clone()
 	e4:SetCode(EFFECT_UPDATE_DEFENSE)
 	c:RegisterEffect(e4)
+		--Equip limit
+	local e9=Effect.CreateEffect(c)
+	e9:SetType(EFFECT_TYPE_SINGLE)
+	e9:SetCode(EFFECT_EQUIP_LIMIT)
+	e9:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e9:SetValue(cm.eqlimit)
+	c:RegisterEffect(e9)
 end
 function cm.val(e,c)
 	local r=c:GetPosition()
