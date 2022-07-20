@@ -61,5 +61,5 @@ function cm.cfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x9905) and c:IsType(TYPE_MONSTER)
 end
 function cm.tgcon(e)
-	return Duel.IsExistingMatchingCard(cm.cfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1)
+	return Duel.IsExistingMatchingCard(cm.cfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 end
