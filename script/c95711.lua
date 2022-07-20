@@ -94,8 +94,8 @@ function cm.activate(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	e1:SetTargetRange(0,1)
-	if Duel.RegisterEffect(e1,tp) then
-		Duel.BreakEffect()
+	Duel.RegisterEffect(e1,tp)
+	if true then		
 		Duel.Draw(1-tp,2,REASON_EFFECT)
 		Duel.Damage(1-tp,1000,REASON_EFFECT)
 	end
