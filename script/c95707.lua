@@ -36,7 +36,7 @@ function c95707.initial_effect(c)
 	c:RegisterEffect(e9)
 end
 function cm.indcon(e)
-	return e:GetHandler():GetEquipTarget():GetDefense()<2500
+	return e:GetHandler():GetEquipTarget():GetDefense()<2500 and e:GetHandler():GetEquipTarget():IsDefensePos()
 end
 function cm.filter(c,tp)
 	return c:IsFaceup() and c:IsControler(tp) and c:IsLocation(LOCATION_ONFIELD) and c:IsSetCard(0x9905)
