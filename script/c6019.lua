@@ -25,8 +25,12 @@ function c6019.initial_effect(c)
 	e3:SetCode(EFFECT_CANNOT_ATTACK_ANNOUNCE)
 	e3:SetRange(LOCATION_SZONE)
 	--this line is to wait for adding a target
+	e3:SetTarget(cm.splimit)
 	e3:SetTargetRange(LOCATION_MZONE,0)
 	c:RegisterEffect(e3)
+end
+function cm.splimit(e,c)
+	return c:GetPosition()~=POS_FACEUP_DEFENSE
 end
 function cm.pfilter(c)
 	return c:IsCanChangePosition()
@@ -39,7 +43,7 @@ end
 function cm.chop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.GetMatchingGroup(cm.pfilter,tp,LOCATION_MZONE,0,nil)
-	if g:GetCount()>0 then				
+	if g:GetCount()>0 then			  
 		local fid=c:GetFieldID()
 		local tc=g:GetFirst()
 		if Duel.ChangePosition(g,POS_FACEUP_DEFENSE) then
@@ -57,7 +61,7 @@ function cm.chop(e,tp,eg,ep,ev,re,r,rp)
 				e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 				tc:RegisterEffect(e2)
 				tc=g:GetNext()
-			end	 
+			end  
 		end
 	end
 end
