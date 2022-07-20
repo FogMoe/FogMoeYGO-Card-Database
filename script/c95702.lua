@@ -35,7 +35,33 @@ function c95702.initial_effect(c)
 	local e9=e3:Clone()
 	e9:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	c:RegisterEffect(e9)
+	--tograve
+	local e8=Effect.CreateEffect(c)
+	e8:SetDescription(aux.Stringid(m,0))
+	e8:SetCategory(CATEGORY_TOGRAVE+CATEGORY_DAMAGE)
+	e8:SetType(EFFECT_TYPE_QUICK_F)
+	e8:SetRange(LOCATION_MZONE)
+	e8:SetCode(EVENT_BECOME_TARGET)
+	e8:SetCountLimit(1)
+	e8:SetCondition(cm.spcon2)
+	e8:SetTarget(cm.thtg)
+	e8:SetOperation(cm.thop)
+	c:RegisterEffect(e8)
 end
+function cm.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():IsAbleToGrave() end
+	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,700)
+end
+function cm.damop(e,tp,eg,ep,ev,re,r,rp)
+	if Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT) and e:GetHandler():IsRelateToEffect(e) then
+		Duel.BreakEffect()
+		Duel.Damage(1-tp,700,REASON_EFFECT)
+	end
+end
+function cm.spcon2(e,tp,eg,ep,ev,re,r,rp)
+	return eg:IsContains(e:GetHandler()) and rp==1-tp
+end
+
 function cm.cfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x9905)
 end

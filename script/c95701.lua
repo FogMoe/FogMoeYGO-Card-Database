@@ -11,6 +11,7 @@ function c95701.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_DIRECT_ATTACK)
+	e2:SetCondition(cm.indcon)
 	c:RegisterEffect(e2)
 	--damage reduce
 	local e4=Effect.CreateEffect(c)
@@ -28,6 +29,23 @@ function c95701.initial_effect(c)
 	e5:SetValue(cm.atkval)
 	e5:SetCondition(cm.indcon)
 	c:RegisterEffect(e5)
+	--position change
+	local e6=Effect.CreateEffect(c)
+	e6:SetDescription(aux.Stringid(m,1))
+	e6:SetCategory(CATEGORY_POSITION)
+	e6:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_SINGLE)
+	e6:SetCode(EVENT_BE_BATTLE_TARGET)
+	e6:SetCondition(cm.atcon)
+	e6:SetOperation(cm.posop)
+	c:RegisterEffect(e6)
+end
+function cm.posop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local atk=Duel.GetAttacker():GetAttack()
+	if c:IsFaceup() and c:IsRelateToEffect(e) then
+		Duel.ChangePosition(c,POS_FACEUP_DEFENSE,0,POS_FACEUP_ATTACK,0)
+		Duel.SetLP(tp,Duel.GetLP(tp)-atk/2)
+	end
 end
 function cm.rdcon(e)
 	local c=e:GetHandler()
@@ -37,6 +55,9 @@ function cm.rdcon(e)
 end
 function cm.indcon(e)
 	return e:GetHandler():IsDefensePos()
+end
+function cm.atcon(e)
+	return e:GetHandler():IsAttackPos()
 end
 function cm.cfilter(c)
 	return c:IsFaceup() and c:IsPosition(POS_ATTACK)

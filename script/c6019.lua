@@ -16,6 +16,7 @@ function c6019.initial_effect(c)
 	e2:SetCode(EVENT_ATTACK_ANNOUNCE)
 	e2:SetTarget(cm.chtg)
 	e2:SetRange(LOCATION_SZONE)
+	e2:SetCondition(cm.spcon)
 	e2:SetCountLimit(1,m)
 	e2:SetOperation(cm.chop)
 	c:RegisterEffect(e2)
@@ -28,6 +29,9 @@ function c6019.initial_effect(c)
 	e3:SetTarget(cm.splimit)
 	e3:SetTargetRange(LOCATION_MZONE,0)
 	c:RegisterEffect(e3)
+end
+function cm.spcon(e,tp,eg,ep,ev,re,r,rp)
+	return ep~=tp
 end
 function cm.splimit(e,c)
 	return c:GetPosition()~=POS_FACEUP_DEFENSE
@@ -43,7 +47,7 @@ end
 function cm.chop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.GetMatchingGroup(cm.pfilter,tp,LOCATION_MZONE,0,nil)
-	if g:GetCount()>0 then			  
+	if g:GetCount()>0 then			
 		local fid=c:GetFieldID()
 		local tc=g:GetFirst()
 		if Duel.ChangePosition(g,POS_FACEUP_DEFENSE) then
