@@ -23,6 +23,11 @@ function c95700.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_CANNOT_DIRECT_ATTACK)
 	c:RegisterEffect(e1)
+	--pierce
+	local e6=Effect.CreateEffect(c)
+	e6:SetType(EFFECT_TYPE_SINGLE)
+	e6:SetCode(EFFECT_PIERCE)
+	c:RegisterEffect(e6)
 end
 function cm.valcon(e,re,r,rp)
 	return bit.band(r,REASON_EFFECT)~=0
