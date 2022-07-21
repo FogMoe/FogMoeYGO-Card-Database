@@ -31,7 +31,7 @@ function c95706.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function cm.indcon(e)
-	return e:GetHandler():IsDefensePos()
+	return e:GetHandler():IsDefensePos() and e:GetHandler():IsDefenseAbove(3000)
 end
 function cm.atlimit(e,c)
 	return c~=e:GetHandler() and c:IsSetCard(0x9905)
