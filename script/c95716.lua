@@ -2,6 +2,11 @@
 local m=95716
 local cm=_G["c"..m]
 function c95716.initial_effect(c)
+	--Activate
+	local e8=Effect.CreateEffect(c)
+	e8:SetType(EFFECT_TYPE_ACTIVATE)
+	e8:SetCode(EVENT_FREE_CHAIN)
+	c:RegisterEffect(e8)
 		--Decrease Atk
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_ATKCHANGE)
