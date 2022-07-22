@@ -20,6 +20,7 @@ function c95717.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetCountLimit(1)
 	e2:SetRange(LOCATION_MZONE)
+	e2:SetCondition(cm.actcon)
 	e2:SetOperation(cm.adchange)
 	c:RegisterEffect(e2)
 		--defense attack
@@ -53,6 +54,9 @@ function cm.posop1(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ChangePosition(e:GetHandler(),POS_FACEUP_DEFENSE)
 	end
 end
+function cm.atkcon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetCurrentPhase()==PHASE_MAIN1
+end
 function cm.adchange(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local batk=c:GetBaseAttack()
@@ -61,7 +65,7 @@ function cm.adchange(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_SET_BASE_ATTACK_FINAL)
 	e2:SetValue(bdef)
-	e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_DISABLE+RESET_PHASE+PHASE_END)
+	e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_DISABLE+RESET_PHASE+PHASE_END,2)
 	c:RegisterEffect(e2)
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_SET_BASE_DEFENSE_FINAL)
@@ -73,4 +77,12 @@ function cm.adchange(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(c:GetDefense()/2)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 	c:RegisterEffect(e1)
+	if c:IsRelateToEffect(e) then
+		local e5=Effect.CreateEffect(c)
+		e5:SetType(EFFECT_TYPE_SINGLE)
+		e5:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+		e5:SetCode(EFFECT_CANNOT_ATTACK)
+		e5:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+		c:RegisterEffect(e5)
+	end
 end

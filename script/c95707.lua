@@ -34,6 +34,16 @@ function c95707.initial_effect(c)
 	e9:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e9:SetValue(cm.eqlimit)
 	c:RegisterEffect(e9)
+	--destroy sub
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_EQUIP)
+	e4:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
+	e4:SetCode(EFFECT_DESTROY_SUBSTITUTE)
+	e4:SetValue(cm.desval)
+	c:RegisterEffect(e4)
+end
+function cm.desval(e,re,r,rp)
+	return bit.band(r,REASON_BATTLE)~=0 or bit.band(r,REASON_EFFECT)~=0
 end
 function cm.indcon(e)
 	return e:GetHandler():GetEquipTarget():GetDefense()<2500 and e:GetHandler():GetEquipTarget():IsDefensePos()
