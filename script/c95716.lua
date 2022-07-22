@@ -97,7 +97,7 @@ function cm.cfilter2(c)
 	return c:IsAttackPos() and c:IsType(TYPE_MONSTER) and c:IsFaceup()
 end
 function cm.atkval(e)
-	return Duel.GetMatchingGroupCount(cm.cfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,nil)*-50
+	return Duel.GetMatchingGroupCount(cm.cfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,nil)*-150
 end
 function cm.defval(e)
 	return Duel.GetMatchingGroupCount(cm.cfilter,e:GetHandlerPlayer(),0,LOCATION_MZONE,nil)*50
