@@ -36,7 +36,7 @@ end
 function cm.rectg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local c=e:GetHandler()
-	local rec=GetMatchingGroupCount(cm.cfilter2,e:GetHandlerPlayer(),LOCATION_MZONE,0,nil)*150
+	local rec=GetMatchingGroupCount(cm.cfilter2,e:GetHandlerPlayer(),LOCATION_MZONE,0,nil)*50
 	if rec<0 then rec=0 end
 	Duel.SetTargetPlayer(tp)
 	Duel.SetTargetParam(rec)
@@ -51,7 +51,7 @@ function cm.cfilter1(c)
 end
 function cm.costchk(e,te_or_c,tp)
 	local numbs=GetMatchingGroupCount(cm.cfilter1,e:GetHandlerPlayer(),LOCATION_SZONE,0,nil)
-	return Duel.CheckLPCost(tp,150*numbs)
+	return Duel.CheckLPCost(tp,50*numbs)
 end
 function cm.costop(e,tp,eg,ep,ev,re,r,rp)
 	local numbs=GetMatchingGroupCount(cm.cfilter1,e:GetHandlerPlayer(),LOCATION_SZONE,0,nil)
