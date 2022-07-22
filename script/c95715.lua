@@ -36,7 +36,7 @@ end
 function cm.rectg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local c=e:GetHandler()
-	local rec=GetMatchingGroupCount(cm.cfilter2,e:GetHandlerPlayer(),LOCATION_MZONE,0,nil)*50
+	local rec=Duel.GetMatchingGroupCount(cm.cfilter2,tp,LOCATION_MZONE,0,nil)*150
 	if rec<0 then rec=0 end
 	Duel.SetTargetPlayer(tp)
 	Duel.SetTargetParam(rec)
@@ -50,10 +50,10 @@ function cm.cfilter1(c)
 	return c:IsFaceup() and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSetCard(0x9905)
 end
 function cm.costchk(e,te_or_c,tp)
-	local numbs=GetMatchingGroupCount(cm.cfilter1,e:GetHandlerPlayer(),LOCATION_SZONE,0,nil)
-	return Duel.CheckLPCost(tp,50*numbs)
+	local numbs=Duel.GetMatchingGroupCount(cm.cfilter1,e:GetHandler():GetControler(),LOCATION_SZONE,0,nil)*50
+	return Duel.CheckLPCost(tp,numbs)
 end
 function cm.costop(e,tp,eg,ep,ev,re,r,rp)
-	local numbs=GetMatchingGroupCount(cm.cfilter1,e:GetHandlerPlayer(),LOCATION_SZONE,0,nil)
-	Duel.PayLPCost(tp,150*numbs)
+	local numbs=Duel.GetMatchingGroupCount(cm.cfilter1,e:GetHandler():GetControler(),LOCATION_SZONE,0,nil)*50
+	Duel.PayLPCost(tp,numbs)
 end
