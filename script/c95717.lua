@@ -20,7 +20,7 @@ function c95717.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetCountLimit(1)
 	e2:SetRange(LOCATION_MZONE)
-	e2:SetCondition(cm.actcon)
+	e2:SetCondition(cm.atkcon)
 	e2:SetOperation(cm.adchange)
 	c:RegisterEffect(e2)
 		--defense attack
